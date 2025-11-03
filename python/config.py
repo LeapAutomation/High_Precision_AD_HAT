@@ -124,10 +124,12 @@ class JetsonNano:
 hostname = os.popen("uname -n").read().strip()
         
 #if os.path.exists('/sys/bus/platform/drivers/gpiomem-bcm2835'):
-if hostname == "raspberrypi":
-    implementation = RaspberryPi()
-else:
-    implementation = JetsonNano()
+# TODO(): fix it later if we need to use it on Jetson
+implementation = RaspberryPi()
+# if hostname == "raspberrypi":
+#     implementation = RaspberryPi()
+# else:
+#     implementation = JetsonNano()
 
 for func in [x for x in dir(implementation) if not x.startswith('_')]:
     setattr(sys.modules[__name__], func, getattr(implementation, func))
